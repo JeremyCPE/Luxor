@@ -22,5 +22,14 @@
 					MaterialOpacity="0.65" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
+		<Button Content="Brightness"
+			Command="{Binding BrightnessCommand}">
+			<PathIcon Data="{StaticResource weather_sunny_regular}" />
+		</Button>
+		<Button Content="Settings" HorizontalAlignment="Right" VerticalAlignment="Top"
+	Command="{Binding SettingsCommand}">
+			<PathIcon Data="{StaticResource settings_regular}" />
+		</Button>
+
 	</Panel>
 </UserControl>
