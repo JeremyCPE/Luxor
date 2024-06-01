@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luxor", "Luxor\Luxor.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luxor.Desktop", "Luxor.Desktop\Luxor.Desktop.csproj", "{11FCA319-1207-4DB5-89C8-B10E452AFE77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luxor.Test", "Luxor.Test\Luxor.Test.csproj", "{5E9EA9B7-CA81-4606-BA26-9A2E78AB6832}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{11FCA319-1207-4DB5-89C8-B10E452AFE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FCA319-1207-4DB5-89C8-B10E452AFE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FCA319-1207-4DB5-89C8-B10E452AFE77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E9EA9B7-CA81-4606-BA26-9A2E78AB6832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9EA9B7-CA81-4606-BA26-9A2E78AB6832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9EA9B7-CA81-4606-BA26-9A2E78AB6832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9EA9B7-CA81-4606-BA26-9A2E78AB6832}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -22,11 +22,16 @@
 					MaterialOpacity="0.65" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
+		<StackPanel Margin="20" VerticalAlignment="Center">
 		<Button Content="Brightness"
 			Command="{Binding BrightnessCommand}">
 			<PathIcon Data="{StaticResource weather_sunny_regular}" />
 		</Button>
-		<Button Content="Settings" HorizontalAlignment="Right" VerticalAlignment="Top"
+			<TextBlock Text="{Binding #slider.Value}"
+						HorizontalAlignment="Center"/>
+			<Slider x:Name="slider" Width="500" Value="{Binding Brightness, Mode=TwoWay}" TickFrequency="10" />
+		</StackPanel>
+		<Button Content="Settings" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Top"
 	Command="{Binding SettingsCommand}">
 			<PathIcon Data="{StaticResource settings_regular}" />
 		</Button>
