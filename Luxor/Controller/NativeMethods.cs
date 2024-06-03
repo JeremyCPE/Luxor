@@ -92,6 +92,20 @@ namespace Luxor.Controller
                 instance.InvokeMethod("WmiSetBrightness", new object[] { UInt32.MaxValue, brightness });
             }
         }
+
+        public static int GetCurrentBrightness()
+        {
+            using var mclass = new ManagementClass("WmiMonitorBrightness")
+            {
+                Scope = new ManagementScope(@"\\.\root\wmi")
+            };
+            using var instances = mclass.GetInstances();
+            foreach (ManagementObject instance in instances)
+            {
+                return (byte)instance.GetPropertyValue("CurrentBrightness");
+            }
+            return 0;
+        }
         #endregion
 
     }

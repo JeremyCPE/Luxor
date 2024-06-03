@@ -10,5 +10,9 @@ namespace Luxor.Services
     {
         int GetCurrentBrightness();
         void SetMonitorBrightness(int brightness);
+
+        int GetMonitorGamma();
+
+        void SetMonitorGamma(int gamma, int brightness);
     }
 }

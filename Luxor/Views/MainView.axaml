@@ -22,14 +22,26 @@
 					MaterialOpacity="0.65" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
-		<StackPanel Margin="20" VerticalAlignment="Center">
+		<StackPanel VerticalAlignment="Center">
+		<Panel>
 		<Button Content="Brightness"
-			Command="{Binding BrightnessCommand}">
+			Command="{Binding BrightnessCommand}" Margin="40,0,0,0">
 			<PathIcon Data="{StaticResource weather_sunny_regular}" />
 		</Button>
-			<TextBlock Text="{Binding #slider.Value}"
+			<TextBlock Text="{Binding Brightness}" Margin="0,0,60,20"
 						HorizontalAlignment="Center"/>
-			<Slider x:Name="slider" Width="500" Value="{Binding Brightness, Mode=TwoWay}" TickFrequency="10" />
+			<Slider x:Name="sliderBrigthness" Width="500" Value="{Binding Brightness, Mode=TwoWay}" TickFrequency="10" Margin="0,0,60,0" />
+		</Panel>
+		
+		<Panel>
+			<Button Content="Gamma"
+				Command="{Binding GammaCommand}" Margin="40,0,0,0">
+				<PathIcon Data="{StaticResource temperature_regular}" />
+			</Button>
+			<TextBlock Text="{Binding Gamma}" Margin="0,0,60,20"
+						HorizontalAlignment="Center"/>
+			<Slider x:Name="sliderGamma" Width="500" Value="{Binding Gamma, Mode=TwoWay}" TickFrequency="10" Margin="0,0,60,0"/>
+		</Panel>
 		</StackPanel>
 		<Button Content="Settings" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Top"
 	Command="{Binding SettingsCommand}">
