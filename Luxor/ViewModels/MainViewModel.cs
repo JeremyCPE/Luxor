@@ -30,6 +30,8 @@ public class MainViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _gamma, value);
     }
 
+    public Interaction<SettingsViewModel, SettingsViewModel?> ShowDialog { get; }
+
     public MainViewModel()
     {
 
@@ -37,6 +39,8 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel(ILuxorServices brightnessServicesController) 
     {
+        ShowDialog = new Interaction<SettingsViewModel, SettingsViewModel?>();
+
         _brightnessServicesController = brightnessServicesController;
         Brightness = _brightnessServicesController.GetCurrentBrightness();
 
@@ -61,14 +65,9 @@ public class MainViewModel : ViewModelBase
 
         SettingsCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            var settingsDialog = new SettingsViewModel();
-            var windows = new Window();
-            await windows.ShowDialog(settingsDialog);
-            
-        });
-    }
+            var store = new SettingsViewModel();
 
-    private async void OpenSettingsDialog(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
+            var result = await ShowDialog.Handle(store);
+        });
     }
 }
