@@ -4,11 +4,12 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Logging;
 using Luxor.Controller;
 
 namespace Luxor.Services
 {
-    public class BrightnessServices : IBrightnessServicesController
+    public class LuxorServices : ILuxorServices
     {
         public int GetCurrentBrightness()
         {
@@ -33,7 +34,10 @@ namespace Luxor.Services
         public void SetMonitorGamma(int blueReduction, int brightness)
         {
             if (blueReduction < 0 || blueReduction > 100)
-                throw new ArgumentOutOfRangeException("Blue reduction must be between 0 and 100.");
+                throw new ArgumentOutOfRangeException("Blue reduction must be between 0 and 100."); // TODO : Manage those exception
+
+            if (brightness < 0 || brightness > 100)
+                throw new ArgumentOutOfRangeException("Brightness must be between 0 and 100.");
 
             NativeMethods.RAMP ramp = new NativeMethods.RAMP
             {
@@ -61,7 +65,7 @@ namespace Luxor.Services
             if (!result)
             {
                 int errorCode = Marshal.GetLastWin32Error();
-                Console.WriteLine($"Failed to set gamma ramp. Error code: {errorCode}");
+                // log the info, or try to catch the exception
             }
             NativeMethods.ReleaseDC(IntPtr.Zero, hdc);
         }

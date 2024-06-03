@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Avalonia;
+using Avalonia.Logging;
 using Avalonia.ReactiveUI;
 
 namespace Luxor.Desktop;
@@ -19,6 +20,6 @@ class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
-            .LogToTrace()
+            .LogToTrace(LogEventLevel.Verbose)
             .UseReactiveUI();
 }

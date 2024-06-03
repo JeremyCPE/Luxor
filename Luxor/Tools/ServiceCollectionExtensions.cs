@@ -13,7 +13,7 @@ namespace Luxor.Tools
     {
         public static void AddCommonServices(this IServiceCollection collection)
         {
-            collection.AddTransient<IBrightnessServicesController,BrightnessServices>();
+            collection.AddTransient<ILuxorServices,LuxorServices>();
             collection.AddTransient<MainViewModel>();
         }
     }

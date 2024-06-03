@@ -10,6 +10,7 @@
         Title="Luxor"
 	    TransparencyLevelHint="AcrylicBlur"
 	    Background="Transparent"
-	    ExtendClientAreaToDecorationsHint="True">
+	    ExtendClientAreaToDecorationsHint="True"
+		WindowStartupLocation="CenterScreen">
 	<views:MainView />
 </Window>

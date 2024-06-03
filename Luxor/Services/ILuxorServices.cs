@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Luxor.Services
 {
-    public interface IBrightnessServicesController
+    public interface ILuxorServices
     {
         int GetCurrentBrightness();
         void SetMonitorBrightness(int brightness);

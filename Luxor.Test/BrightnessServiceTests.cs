@@ -11,7 +11,7 @@ namespace Luxor.Test
         public void SetBrightness_WithValidBrightness_CallsSetMonitorBrightness()
         {
             // Arrange
-            var brightnessService = new BrightnessServices();
+            var brightnessService = new LuxorServices();
             int validBrightness = 50;
 
             // Act
@@ -27,7 +27,7 @@ namespace Luxor.Test
         public void SetBrightness_WithInvalidBrightness_ThrowsArgumentOutOfRangeException(int invalidBrightness)
         {
             // Arrange
-            var brightnessService = new BrightnessServices();
+            var brightnessService = new LuxorServices();
 
             // Act & Assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => brightnessService.SetMonitorBrightness(invalidBrightness));

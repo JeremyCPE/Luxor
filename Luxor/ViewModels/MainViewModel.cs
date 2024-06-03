@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Windows.Input;
+using Avalonia.Controls;
 using Luxor.Services;
 using ReactiveUI;
 
@@ -10,7 +11,7 @@ public class MainViewModel : ViewModelBase
 {
     bool _switchBrightness = false;
 
-    private readonly IBrightnessServicesController _brightnessServicesController;
+    private readonly ILuxorServices _brightnessServicesController;
     public ICommand BrightnessCommand { get; }
     public ICommand GammaCommand { get; }
     public ICommand SettingsCommand { get; }
@@ -34,7 +35,7 @@ public class MainViewModel : ViewModelBase
 
     }
 
-    public MainViewModel(IBrightnessServicesController brightnessServicesController) 
+    public MainViewModel(ILuxorServices brightnessServicesController) 
     {
         _brightnessServicesController = brightnessServicesController;
         Brightness = _brightnessServicesController.GetCurrentBrightness();
@@ -46,7 +47,7 @@ public class MainViewModel : ViewModelBase
 
         this.WhenAnyValue(x => x.Gamma)
         .Throttle(TimeSpan.FromMilliseconds(50)) // Throttle to avoid too many updates
-        .Subscribe(gamma => _brightnessServicesController.SetMonitorGamma(gamma, Brightness));
+        .Subscribe(blueReduction => _brightnessServicesController.SetMonitorGamma(blueReduction, Brightness));
 
         BrightnessCommand = ReactiveCommand.Create(() =>
         {
@@ -58,8 +59,16 @@ public class MainViewModel : ViewModelBase
             Gamma = 100;
         });
 
-        SettingsCommand = ReactiveCommand.Create(() =>
+        SettingsCommand = ReactiveCommand.CreateFromTask(async () =>
         {
+            var settingsDialog = new SettingsViewModel();
+            var windows = new Window();
+            await windows.ShowDialog(settingsDialog);
+            
         });
+    }
+
+    private async void OpenSettingsDialog(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
     }
 }

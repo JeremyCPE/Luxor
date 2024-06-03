@@ -4,7 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Luxor.Views.Settings"
-        Title="Settings">
+        Title="Settings"
+		Width="1000" Height="550"
+        WindowStartupLocation="CenterOwner">
 
 	<Panel>
 		<ExperimentalAcrylicBorder IsHitTestVisible="False">
@@ -17,7 +19,7 @@
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
 		<Panel Margin="40">
-
+			<TextBlock> Lorem ipsum, here I'll put all the settings I want blalabal</TextBlock>
 		</Panel>
 	</Panel>
 	
