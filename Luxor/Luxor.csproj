@@ -25,4 +25,20 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Icons.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Views\Dashboard.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Dashboard.axaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Dashboard.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings.axaml.cs">
+      <DependentUpon>Settings.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
