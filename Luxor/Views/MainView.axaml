@@ -48,8 +48,8 @@
 	Command="{Binding SettingsCommand}">
 			<PathIcon Data="{StaticResource settings_regular}" />
 		</Button>
-		<Button Content="Dashboard" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding Dashboard}">
+		<Button Content="Dashboard" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding DashboardCommand}">
 			<PathIcon Data="{StaticResource data_usage_regular}" />
-			</Button>
+		</Button>
 	</Panel>
 </UserControl>

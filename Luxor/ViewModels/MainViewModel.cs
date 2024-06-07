@@ -3,6 +3,7 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using Avalonia.Controls;
 using Luxor.Services;
+using Luxor.Views;
 using ReactiveUI;
 
 namespace Luxor.ViewModels;
@@ -15,6 +16,7 @@ public class MainViewModel : ViewModelBase
     public ICommand BrightnessCommand { get; }
     public ICommand GammaCommand { get; }
     public ICommand SettingsCommand { get; }
+    public ICommand DashboardCommand { get; }
 
     private int _brightness;
     private int _gamma;
@@ -31,6 +33,7 @@ public class MainViewModel : ViewModelBase
     }
 
     public Interaction<SettingsViewModel, SettingsViewModel?> ShowDialog { get; }
+    public Interaction<DashboardViewModel, DashboardViewModel?> ShowDashDialog { get; }
 
     public MainViewModel()
     {
@@ -40,6 +43,7 @@ public class MainViewModel : ViewModelBase
     public MainViewModel(ILuxorServices brightnessServicesController) 
     {
         ShowDialog = new Interaction<SettingsViewModel, SettingsViewModel?>();
+        ShowDashDialog = new Interaction<DashboardViewModel, DashboardViewModel?>();
 
         _brightnessServicesController = brightnessServicesController;
         Brightness = _brightnessServicesController.GetCurrentBrightness();
@@ -69,5 +73,12 @@ public class MainViewModel : ViewModelBase
 
             var result = await ShowDialog.Handle(store);
         });
+        DashboardCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var store = new DashboardViewModel();
+
+            var result = await ShowDashDialog.Handle(store);
+        });
+
     }
 }

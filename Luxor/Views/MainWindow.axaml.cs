@@ -13,6 +13,9 @@ public partial class MainWindow : ReactiveWindow<MainViewModel>
         InitializeComponent();
         this.WhenActivated(action =>
     action(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
+        this.WhenActivated(action =>
+    action(ViewModel!.ShowDashDialog.RegisterHandler(DoShowDialogAsync)));
+
     }
 
     private async Task DoShowDialogAsync(InteractionContext<SettingsViewModel,
@@ -22,6 +25,15 @@ public partial class MainWindow : ReactiveWindow<MainViewModel>
         dialog.DataContext = interaction.Input;
 
         var result = await dialog.ShowDialog<SettingsViewModel?>(this);
+        interaction.SetOutput(result);
+    } 
+    private async Task DoShowDialogAsync(InteractionContext<DashboardViewModel,
+                                        DashboardViewModel?> interaction)
+    {
+        var dialog = new Dashboard();
+        dialog.DataContext = interaction.Input;
+
+        var result = await dialog.ShowDialog<DashboardViewModel?>(this);
         interaction.SetOutput(result);
     }
 }
