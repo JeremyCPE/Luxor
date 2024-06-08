@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Logging;
 using Luxor.Controller;
+using static Luxor.Controller.NativeMethods;
 
 namespace Luxor.Services
 {
@@ -18,7 +21,18 @@ namespace Luxor.Services
 
         public int GetMonitorGamma()
         {
-            // throw new NotImplementedException();
+            NativeMethods.RAMP ramp = new NativeMethods.RAMP
+            {
+                Red = new ushort[256],
+                Green = new ushort[256],
+                Blue = new ushort[256]
+            };
+            IntPtr hdc = NativeMethods.GetDC(IntPtr.Zero);
+
+            bool result = NativeMethods.GetDeviceGammaRamp(hdc, ref ramp);
+
+            Console.WriteLine(ramp.Blue);
+
             return 0;
         }
 
@@ -68,6 +82,19 @@ namespace Luxor.Services
                 // log the info, or try to catch the exception
             }
             NativeMethods.ReleaseDC(IntPtr.Zero, hdc);
+        }
+
+        public void SetSleepTime(TimePicker sleepTime)
+        {
+            Debug.WriteLine($"SetSleepTime changed by {sleepTime}");
+
+            //throw new NotImplementedException();
+        }
+
+        public void SetWakeUpTime(TimePicker wakeUpTime)
+        {
+            Debug.WriteLine($"SetWakeUpTime changed by {wakeUpTime}");
+            //throw new NotImplementedException();
         }
     }
 }

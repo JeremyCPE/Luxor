@@ -42,7 +42,18 @@
 			<TextBlock Text="{Binding Gamma}" Margin="0,0,60,20"
 						HorizontalAlignment="Center"/>
 			<Slider x:Name="sliderGamma" Width="500" Value="{Binding Gamma, Mode=TwoWay}" TickFrequency="10" Margin="0,0,60,0"/>
+			
 		</Panel>
+			<Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto,Auto"  Margin="40,20,0,0">
+				<CheckBox Grid.Row="1" Grid.Column="0">Auto </CheckBox>
+				<Label  Grid.Row="0" Grid.Column="1" Content="Wake up"/>
+				<TimePicker  Grid.Row="1" Grid.Column="1" ClockIdentifier="24HourClock"
+							MinuteIncrement="1" SelectedTime="{Binding WakeUpTime, Mode=TwoWay}"/>
+				<Label  Grid.Row="0" Grid.Column="2" Content="Sleep"/>
+				<TimePicker  Grid.Row="1" Grid.Column="2" ClockIdentifier="24HourClock"
+							MinuteIncrement="1" SelectedTime="{Binding SleepTime, Mode=TwoWay}"/>
+			</Grid>
+			
 		</StackPanel>
 		<Button Content="Settings" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Top"
 	Command="{Binding SettingsCommand}">
@@ -51,5 +62,7 @@
 		<Button Content="Dashboard" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding DashboardCommand}">
 			<PathIcon Data="{StaticResource data_usage_regular}" />
 		</Button>
+
+		
 	</Panel>
 </UserControl>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 
 namespace Luxor.Services
 {
@@ -14,5 +15,8 @@ namespace Luxor.Services
         int GetMonitorGamma();
 
         void SetMonitorGamma(int gamma, int brightness);
+
+       void SetWakeUpTime(TimePicker wakeUpTime);
+       void SetSleepTime(TimePicker sleepTime);
     }
 }

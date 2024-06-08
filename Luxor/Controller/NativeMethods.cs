@@ -61,6 +61,9 @@ namespace Luxor.Controller
         [DllImport("gdi32.dll", SetLastError = true)]
         public static extern bool SetDeviceGammaRamp(IntPtr hDC, ref RAMP lpRamp);
 
+        [DllImport("gdi32.dll", SetLastError = true)]
+        public static extern bool GetDeviceGammaRamp(IntPtr hdc, ref RAMP ramp);
+
         [DllImport("user32.dll")]
         public static extern IntPtr GetDC(IntPtr hWnd);
 
@@ -106,6 +109,8 @@ namespace Luxor.Controller
             }
             return 0;
         }
+
+
         #endregion
 
     }

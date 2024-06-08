@@ -12,7 +12,7 @@ public class MainViewModel : ViewModelBase
 {
     bool _switchBrightness = false;
 
-    private readonly ILuxorServices _brightnessServicesController;
+    private readonly ILuxorServices _luxorServices;
     public ICommand BrightnessCommand { get; }
     public ICommand GammaCommand { get; }
     public ICommand SettingsCommand { get; }
@@ -20,6 +20,8 @@ public class MainViewModel : ViewModelBase
 
     private int _brightness;
     private int _gamma;
+    private TimePicker _wakeUpTime = new TimePicker() { SelectedTime = new TimeSpan(8, 0, 0) };
+    private TimePicker _sleepTime = new TimePicker() { SelectedTime = new TimeSpan(22, 15, 0) };
     public int Brightness
     {
         get => _brightness;
@@ -30,6 +32,25 @@ public class MainViewModel : ViewModelBase
     {
         get => _gamma;
         set => this.RaiseAndSetIfChanged(ref _gamma, value);
+    }    
+    
+    public TimePicker WakeUpTime
+    {
+        get => _wakeUpTime;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _wakeUpTime, value);
+            _luxorServices.SetWakeUpTime(value);
+        }
+    }    
+    public TimePicker SleepTime
+    {
+        get => _sleepTime;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _sleepTime, value);
+            _luxorServices.SetSleepTime(value);
+        }
     }
 
     public Interaction<SettingsViewModel, SettingsViewModel?> ShowDialog { get; }
@@ -40,22 +61,22 @@ public class MainViewModel : ViewModelBase
 
     }
 
-    public MainViewModel(ILuxorServices brightnessServicesController) 
+    public MainViewModel(ILuxorServices luxorServicesController) 
     {
         ShowDialog = new Interaction<SettingsViewModel, SettingsViewModel?>();
         ShowDashDialog = new Interaction<DashboardViewModel, DashboardViewModel?>();
 
-        _brightnessServicesController = brightnessServicesController;
-        Brightness = _brightnessServicesController.GetCurrentBrightness();
+        _luxorServices = luxorServicesController;
+        Brightness = _luxorServices.GetCurrentBrightness();
 
         this.WhenAnyValue(x => x.Brightness)
         .Throttle(TimeSpan.FromMilliseconds(50)) // Throttle to avoid too many updates
-        .Subscribe(brightness => _brightnessServicesController.SetMonitorBrightness(brightness));
+        .Subscribe(brightness => _luxorServices.SetMonitorBrightness(brightness));
 
 
         this.WhenAnyValue(x => x.Gamma)
         .Throttle(TimeSpan.FromMilliseconds(50)) // Throttle to avoid too many updates
-        .Subscribe(blueReduction => _brightnessServicesController.SetMonitorGamma(blueReduction, Brightness));
+        .Subscribe(blueReduction => _luxorServices.SetMonitorGamma(blueReduction, Brightness));
 
         BrightnessCommand = ReactiveCommand.Create(() =>
         {
@@ -66,6 +87,7 @@ public class MainViewModel : ViewModelBase
         {
             Gamma = 100;
         });
+
 
         SettingsCommand = ReactiveCommand.CreateFromTask(async () =>
         {
