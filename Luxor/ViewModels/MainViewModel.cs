@@ -18,6 +18,8 @@ public class MainViewModel : ViewModelBase
     public ICommand SettingsCommand { get; }
     public ICommand DashboardCommand { get; }
 
+    private bool _autoChecked;
+
     private int _brightness;
     private int _gamma;
     private TimePicker _wakeUpTime = new TimePicker() { SelectedTime = new TimeSpan(8, 0, 0) };
@@ -32,8 +34,13 @@ public class MainViewModel : ViewModelBase
     {
         get => _gamma;
         set => this.RaiseAndSetIfChanged(ref _gamma, value);
-    }    
-    
+    }
+
+    public bool AutoChecked
+    {
+        get => _autoChecked;
+        set => this.RaiseAndSetIfChanged(ref _autoChecked, value);
+    }
     public TimePicker WakeUpTime
     {
         get => _wakeUpTime;

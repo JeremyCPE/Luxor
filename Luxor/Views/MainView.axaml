@@ -45,7 +45,7 @@
 			
 		</Panel>
 			<Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto,Auto"  Margin="40,20,0,0">
-				<CheckBox Grid.Row="1" Grid.Column="0">Auto </CheckBox>
+				<CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding AutoChecked}">Auto </CheckBox>
 				<Label  Grid.Row="0" Grid.Column="1" Content="Wake up"/>
 				<TimePicker  Grid.Row="1" Grid.Column="1" ClockIdentifier="24HourClock"
 							MinuteIncrement="1" SelectedTime="{Binding WakeUpTime, Mode=TwoWay}"/>
