@@ -87,12 +87,26 @@ public class MainViewModel : ViewModelBase
 
         BrightnessCommand = ReactiveCommand.Create(() =>
         {
-            Brightness = 100;
+            if (Brightness == 100)
+            {
+                Brightness = 0;
+            }
+            else
+            {
+                Brightness = 100;
+            }
         });
 
         GammaCommand = ReactiveCommand.Create(() =>
         {
-            Gamma = 100;
+            if(Gamma == 100)
+            {
+                Gamma = 0;
+            }
+            else
+            {
+                Gamma = 100; 
+            }
         });
 
 
