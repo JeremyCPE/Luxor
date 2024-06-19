@@ -22,8 +22,8 @@ public class MainViewModel : ViewModelBase
 
     private int _brightness;
     private int _gamma;
-    private TimePicker _wakeUpTime = new TimePicker() { SelectedTime = new TimeSpan(8, 0, 0) };
-    private TimePicker _sleepTime = new TimePicker() { SelectedTime = new TimeSpan(22, 15, 0) };
+    private TimeSpan _wakeUpTime =  new TimeSpan(8, 0, 0);
+    private TimeSpan _sleepTime = new TimeSpan(22, 15, 0);
     public int Brightness
     {
         get => _brightness;
@@ -41,7 +41,7 @@ public class MainViewModel : ViewModelBase
         get => _autoChecked;
         set => this.RaiseAndSetIfChanged(ref _autoChecked, value);
     }
-    public TimePicker WakeUpTime
+    public TimeSpan WakeUpTime
     {
         get => _wakeUpTime;
         set
@@ -50,7 +50,7 @@ public class MainViewModel : ViewModelBase
             _luxorServices.SetWakeUpTime(value);
         }
     }    
-    public TimePicker SleepTime
+    public TimeSpan SleepTime
     {
         get => _sleepTime;
         set

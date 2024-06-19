@@ -84,17 +84,16 @@ namespace Luxor.Services
             NativeMethods.ReleaseDC(IntPtr.Zero, hdc);
         }
 
-        public void SetSleepTime(TimePicker sleepTime)
+        public void SetSleepTime(TimeSpan sleepTime)
         {
             Debug.WriteLine($"SetSleepTime changed by {sleepTime}");
-
-            //throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
-        public void SetWakeUpTime(TimePicker wakeUpTime)
+        public void SetWakeUpTime(TimeSpan wakeUpTime)
         {
             Debug.WriteLine($"SetWakeUpTime changed by {wakeUpTime}");
-            //throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
     }
 }
