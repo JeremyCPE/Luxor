@@ -5,20 +5,20 @@ using Xunit;
 
 namespace Luxor.Test
 {
-    public class BrightnessServiceTests
+    public class LuxorServicesTests
     {
         [Fact]
         public void SetBrightness_WithValidBrightness_CallsSetMonitorBrightness()
         {
             // Arrange
-            var brightnessService = new LuxorServices();
+            var luxorService = new LuxorServices();
             int validBrightness = 50;
 
             // Act
-            brightnessService.SetMonitorBrightness(validBrightness);
+            luxorService.SetMonitorBrightness(validBrightness);
 
             // Assert
-            Assert.IsTrue(true);
+            Xunit.Assert.True(true);
         }
 
         [Theory]
@@ -27,10 +27,10 @@ namespace Luxor.Test
         public void SetBrightness_WithInvalidBrightness_ThrowsArgumentOutOfRangeException(int invalidBrightness)
         {
             // Arrange
-            var brightnessService = new LuxorServices();
+            var luxorService = new LuxorServices();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => brightnessService.SetMonitorBrightness(invalidBrightness));
+            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => luxorService.SetMonitorBrightness(invalidBrightness));
         }
     }
 }

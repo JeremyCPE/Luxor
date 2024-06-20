@@ -94,14 +94,22 @@ namespace Luxor.Services
         public void SetSleepTime(TimeSpan sleepTime)
         {
             Debug.WriteLine($"SetSleepTime changed by {sleepTime}");
-            // throw new NotImplementedException();
+            if (sleepTime == userSettings.WakeUpTime)
+            {
+                Debug.WriteLine("WakeUpTime cannot be the same than sleepTime");
+                return;
+            }
             userSettings.SleepTime = sleepTime;
         }
 
         public void SetWakeUpTime(TimeSpan wakeUpTime)
         {
             Debug.WriteLine($"SetWakeUpTime changed by {wakeUpTime}");
-            // throw new NotImplementedException();
+            if(wakeUpTime == userSettings.SleepTime)
+            {
+                Debug.WriteLine("WakeUpTime cannot be the same than sleepTime");
+                return;
+            }
             userSettings.WakeUpTime = wakeUpTime;
         }
     }
