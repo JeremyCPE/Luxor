@@ -8,12 +8,19 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Logging;
 using Luxor.Controller;
+using Luxor.Settings;
 using static Luxor.Controller.NativeMethods;
 
 namespace Luxor.Services
 {
     public class LuxorServices : ILuxorServices
     {
+        private readonly UserSettings userSettings;
+
+        public LuxorServices()
+        {
+            userSettings = new();
+        }
         public int GetCurrentBrightness()
         {
             return NativeMethods.GetCurrentBrightness();
@@ -88,12 +95,14 @@ namespace Luxor.Services
         {
             Debug.WriteLine($"SetSleepTime changed by {sleepTime}");
             // throw new NotImplementedException();
+            userSettings.SleepTime = sleepTime;
         }
 
         public void SetWakeUpTime(TimeSpan wakeUpTime)
         {
             Debug.WriteLine($"SetWakeUpTime changed by {wakeUpTime}");
             // throw new NotImplementedException();
+            userSettings.WakeUpTime = wakeUpTime;
         }
     }
 }

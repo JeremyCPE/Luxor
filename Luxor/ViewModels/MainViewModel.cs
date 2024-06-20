@@ -3,6 +3,7 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using Avalonia.Controls;
 using Luxor.Services;
+using Luxor.Settings;
 using Luxor.Views;
 using ReactiveUI;
 
@@ -22,8 +23,8 @@ public class MainViewModel : ViewModelBase
 
     private int _brightness;
     private int _gamma;
-    private TimeSpan _wakeUpTime =  new TimeSpan(8, 0, 0);
-    private TimeSpan _sleepTime = new TimeSpan(22, 15, 0);
+    private TimeSpan _wakeUpTime = UserSettings.DefaultWakeUpTime;
+    private TimeSpan _sleepTime = UserSettings.DefaultSleepTime;
     public int Brightness
     {
         get => _brightness;
