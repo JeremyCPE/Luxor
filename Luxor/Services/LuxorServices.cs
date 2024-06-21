@@ -15,12 +15,23 @@ namespace Luxor.Services
 {
     public class LuxorServices : ILuxorServices
     {
-        private readonly UserSettings userSettings;
+        private readonly UserSettings _userSettings;
+
+        private readonly Cycle _cycle;
 
         public LuxorServices()
         {
-            userSettings = new();
+            _userSettings = new();
+            _cycle = new(this);
+            Task.Run(() => _cycle.Start());
         }
+
+        public bool Process()
+        {
+            Debug.WriteLine($"Process executed ! {_cycle}");
+            return true;
+        }
+
         public int GetCurrentBrightness()
         {
             return NativeMethods.GetCurrentBrightness();
@@ -93,24 +104,24 @@ namespace Luxor.Services
 
         public void SetSleepTime(TimeSpan sleepTime)
         {
-            Debug.WriteLine($"SetSleepTime changed by {sleepTime}");
-            if (sleepTime == userSettings.WakeUpTime)
+            Debug.WriteLine($"SetSleepTime changed by {sleepTime}"); // Todo : better logging
+            if (sleepTime == _userSettings.WakeUpTime)
             {
                 Debug.WriteLine("WakeUpTime cannot be the same than sleepTime");
                 return;
             }
-            userSettings.SleepTime = sleepTime;
+            _userSettings.SleepTime = sleepTime;
         }
 
         public void SetWakeUpTime(TimeSpan wakeUpTime)
         {
             Debug.WriteLine($"SetWakeUpTime changed by {wakeUpTime}");
-            if(wakeUpTime == userSettings.SleepTime)
+            if(wakeUpTime == _userSettings.SleepTime)
             {
                 Debug.WriteLine("WakeUpTime cannot be the same than sleepTime");
                 return;
             }
-            userSettings.WakeUpTime = wakeUpTime;
+            _userSettings.WakeUpTime = wakeUpTime;
         }
     }
 }

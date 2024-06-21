@@ -9,8 +9,8 @@ namespace Luxor.Settings
 
         public TimeSpan SleepTime { get; set; }
         public TimeSpan WakeUpTime { get; set; }
-        public bool IsAuto { get; set; }
 
+        public bool IsAuto { get; set; } = true;
         public UserSettings() { 
         
             SleepTime = DefaultSleepTime;

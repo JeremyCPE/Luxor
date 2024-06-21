@@ -1,5 +1,6 @@
 using System;
 using Luxor.Services;
+using Luxor.Settings;
 using Moq;
 using Xunit;
 

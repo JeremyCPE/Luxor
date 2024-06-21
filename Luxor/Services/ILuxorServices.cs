@@ -9,6 +9,8 @@ namespace Luxor.Services
 {
     public interface ILuxorServices
     {
+        bool Process();
+
         int GetCurrentBrightness();
         void SetMonitorBrightness(int brightness);
 
@@ -18,5 +20,6 @@ namespace Luxor.Services
 
        void SetWakeUpTime(TimeSpan wakeUpTime);
        void SetSleepTime(TimeSpan sleepTime);
+
     }
 }
