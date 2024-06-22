@@ -29,7 +29,21 @@ namespace Luxor.Services
         public bool Process()
         {
             Debug.WriteLine($"Process executed ! {_cycle}");
+            AdaptGamma();
             return true;
+        }
+
+        /// <summary>
+        /// Adapt the gamma depending of the WakeUpTime and SleepTime. What we want : blue reduction 100% when sleepTime
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        private void AdaptGamma()
+        {
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            var percent = CalculateTimePercentage(_userSettings.WakeUpTime,_userSettings.SleepTime, currentTime);
+
+            Debug.WriteLine($"Reduction of % {percent} blueReduction...");
+            SetMonitorGamma(percent, GetCurrentBrightness());
         }
 
         public int GetCurrentBrightness()
@@ -116,12 +130,38 @@ namespace Luxor.Services
         public void SetWakeUpTime(TimeSpan wakeUpTime)
         {
             Debug.WriteLine($"SetWakeUpTime changed by {wakeUpTime}");
-            if(wakeUpTime == _userSettings.SleepTime)
+            if (wakeUpTime == _userSettings.SleepTime)
             {
                 Debug.WriteLine("WakeUpTime cannot be the same than sleepTime");
                 return;
             }
             _userSettings.WakeUpTime = wakeUpTime;
         }
+
+
+        public int CalculateTimePercentage(TimeSpan wakeUpTime, TimeSpan sleepTime, TimeSpan currentTime)
+        {
+            // Normalize sleepTime to handle cases where sleepTime is after midnight
+            if (sleepTime < wakeUpTime)
+            {
+                sleepTime += TimeSpan.FromDays(1);
+            }
+
+            // Adjust current time to fall within the wake-sleep period
+            if (currentTime < wakeUpTime)
+            {
+                currentTime += TimeSpan.FromDays(1);
+            }
+
+            // Calculate the total span and elapsed time
+            TimeSpan totalSpan = sleepTime - wakeUpTime;
+            TimeSpan elapsedTime = currentTime - wakeUpTime;
+
+            // Calculate the percentage
+            double percentage = (elapsedTime.TotalMinutes / totalSpan.TotalMinutes) * 100;
+
+            return (int)Math.Ceiling(percentage);
+
+        }
     }
-}
+    }

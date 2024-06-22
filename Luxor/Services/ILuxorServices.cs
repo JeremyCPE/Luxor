@@ -18,8 +18,10 @@ namespace Luxor.Services
 
         void SetMonitorGamma(int gamma, int brightness);
 
-       void SetWakeUpTime(TimeSpan wakeUpTime);
-       void SetSleepTime(TimeSpan sleepTime);
+        void SetWakeUpTime(TimeSpan wakeUpTime);
+        void SetSleepTime(TimeSpan sleepTime);
+
+        int CalculateTimePercentage(TimeSpan wakeUpTime, TimeSpan sleepTime,TimeSpan currentTime);
 
     }
 }

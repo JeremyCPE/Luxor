@@ -33,5 +33,33 @@ namespace Luxor.Test
             // Act & Assert
             Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => luxorService.SetMonitorBrightness(invalidBrightness));
         }
+
+        [Theory]
+        [InlineData(8, 0,  22, 0,  8, 0, 0.0)]
+        [InlineData(8, 0, 22, 0, 10, 0, 12)]
+        [InlineData(8, 0, 22, 0, 22, 0, 100.0)]
+        [InlineData(8, 0, 2, 0, 8, 0, 0.0)]
+        [InlineData(8, 0, 2, 0, 14, 0, 25.0)]
+        [InlineData(8, 0, 2, 0, 2, 0, 100.0)]
+        [InlineData(22, 0, 6, 0, 2, 0, 50.0)]
+        [InlineData(22, 0, 6, 0, 23, 0, 13)]
+        public void CalculateTimePercentage_ShouldReturnExpectedPercentage(int wakeUpHour, int wakeUpMinute,
+                                                                  int sleepHour, int sleepMinute,
+                                                                  int currentHour, int currentMinute,
+                                                                  double expected)
+        {
+            // Arrange
+            TimeSpan wakeUpTime = new TimeSpan(wakeUpHour, wakeUpMinute, 0);
+            TimeSpan sleepTime = new TimeSpan(sleepHour, sleepMinute, 0);
+            TimeSpan currentTime = new TimeSpan(currentHour, currentMinute, 0);
+
+            // Act
+            var luxorService = new LuxorServices();
+
+            double result = luxorService.CalculateTimePercentage(wakeUpTime, sleepTime, currentTime);
+
+            // Assert
+            Xunit.Assert.Equal(expected, result, 10);
+        }
     }
 }
