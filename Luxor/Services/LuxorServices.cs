@@ -116,6 +116,15 @@ namespace Luxor.Services
             NativeMethods.ReleaseDC(IntPtr.Zero, hdc);
         }
 
+        public TimeSpan GetSleepTime()
+        {
+            return _userSettings.SleepTime;
+        }
+
+        public TimeSpan GetWakeUpTime()
+        {
+            return _userSettings.WakeUpTime;
+        }
         public void SetSleepTime(TimeSpan sleepTime)
         {
             Debug.WriteLine($"SetSleepTime changed by {sleepTime}"); // Todo : better logging

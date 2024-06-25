@@ -43,10 +43,7 @@ namespace Luxor.Test
         [InlineData(8, 0, 2, 0, 2, 0, 100.0)]
         [InlineData(22, 0, 6, 0, 2, 0, 50.0)]
         [InlineData(22, 0, 6, 0, 23, 0, 13)]
-        public void CalculateTimePercentage_ShouldReturnExpectedPercentage(int wakeUpHour, int wakeUpMinute,
-                                                                  int sleepHour, int sleepMinute,
-                                                                  int currentHour, int currentMinute,
-                                                                  double expected)
+        public void CalculateTimePercentage_ShouldReturnExpectedPercentage(int wakeUpHour, int wakeUpMinute,                                                                 int sleepHour, int sleepMinute,                                                      int currentHour, int currentMinute,                                                          double expected)
         {
             // Arrange
             TimeSpan wakeUpTime = new TimeSpan(wakeUpHour, wakeUpMinute, 0);

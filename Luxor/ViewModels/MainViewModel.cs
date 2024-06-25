@@ -22,8 +22,8 @@ public class MainViewModel : ViewModelBase
 
     private int _brightness;
     private int _gamma;
-    private TimeSpan _wakeUpTime = UserSettings.DefaultWakeUpTime;
-    private TimeSpan _sleepTime = UserSettings.DefaultSleepTime;
+    private TimeSpan _wakeUpTime;
+    private TimeSpan _sleepTime;
     public int Brightness
     {
         get => _brightness;
@@ -68,6 +68,9 @@ public class MainViewModel : ViewModelBase
         ShowDashDialog = new Interaction<DashboardViewModel, DashboardViewModel?>();
 
         _luxorServices = luxorServicesController;
+
+        _wakeUpTime = _luxorServices.GetWakeUpTime();
+        _sleepTime = _luxorServices.GetSleepTime();
         Brightness = _luxorServices.GetCurrentBrightness();
 
         this.WhenAnyValue(x => x.Brightness)
