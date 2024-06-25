@@ -39,6 +39,10 @@ namespace Luxor.Services
         /// <exception cref="NotImplementedException"></exception>
         private void AdaptGamma()
         {
+            if(_userSettings.IsDisabled)
+            {
+                return;
+            }
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             var percent = CalculateTimePercentage(_userSettings.WakeUpTime,_userSettings.SleepTime, currentTime);
 
@@ -151,6 +155,10 @@ namespace Luxor.Services
         public int CalculateTimePercentage(TimeSpan wakeUpTime, TimeSpan sleepTime, TimeSpan currentTime)
         {
             // Normalize sleepTime to handle cases where sleepTime is after midnight
+            if (sleepTime < currentTime)
+            {
+                return 100;
+            }
             if (sleepTime < wakeUpTime)
             {
                 sleepTime += TimeSpan.FromDays(1);
@@ -171,6 +179,20 @@ namespace Luxor.Services
 
             return (int)Math.Ceiling(percentage);
 
+        }
+
+        public void SetIsDisabled(bool isDisabled)
+        {
+            if (isDisabled)
+            {
+                _cycle.Stop();
+                SetMonitorGamma(0, GetCurrentBrightness());
+            }
+            else
+            {
+                Task.Run(() => _cycle.Start());
+            }
+            _userSettings.IsDisabled = isDisabled;
         }
     }
     }

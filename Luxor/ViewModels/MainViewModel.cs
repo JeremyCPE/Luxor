@@ -24,6 +24,7 @@ public class MainViewModel : ViewModelBase
     private int _gamma;
     private TimeSpan _wakeUpTime;
     private TimeSpan _sleepTime;
+    private bool _isDisabled;
     public int Brightness
     {
         get => _brightness;
@@ -51,6 +52,16 @@ public class MainViewModel : ViewModelBase
         {
             this.RaiseAndSetIfChanged(ref _sleepTime, value);
             _luxorServices.SetSleepTime(value);
+        }
+    }
+
+    public bool IsDisabled
+    {
+        get => _isDisabled;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isDisabled, value);
+            _luxorServices.SetIsDisabled(value);
         }
     }
 
@@ -121,4 +132,5 @@ public class MainViewModel : ViewModelBase
         });
 
     }
+
 }

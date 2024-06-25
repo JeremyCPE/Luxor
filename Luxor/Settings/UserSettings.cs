@@ -7,7 +7,7 @@ namespace Luxor.Settings
         public TimeSpan SleepTime { get; set; } = new(21, 0, 0);
         public TimeSpan WakeUpTime { get; set; } = new(8, 0, 0);
 
-        public bool IsAuto { get; set; } = true;
+        public bool IsDisabled { get; set; } = true;
         public UserSettings() 
         { 
       

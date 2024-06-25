@@ -17,7 +17,7 @@ namespace Luxor.Services
             _luxorServices = IluxorServices;
         }
         public int TransitionInSec { get; set; } = 5;
-        public State State { get; set; } = State.Stop;
+        private State State { get; set; } = State.Stop;
 
         public bool CanProcess { get; set; } = true;
 
@@ -54,6 +54,12 @@ namespace Luxor.Services
                 Debug.WriteLine("Error during the process");
             }
             this.State = State.Running;
+        }
+
+        public void Stop()
+        {
+            this.State = State.Stop;
+
         }
     }
 

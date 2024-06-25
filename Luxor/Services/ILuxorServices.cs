@@ -24,6 +24,8 @@ namespace Luxor.Services
         void SetWakeUpTime(TimeSpan wakeUpTime);
         void SetSleepTime(TimeSpan sleepTime);
 
+        void SetIsDisabled(bool isDisabled);
+
         int CalculateTimePercentage(TimeSpan wakeUpTime, TimeSpan sleepTime,TimeSpan currentTime);
 
     }
