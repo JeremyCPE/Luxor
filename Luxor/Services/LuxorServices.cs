@@ -155,10 +155,6 @@ namespace Luxor.Services
         public int CalculateTimePercentage(TimeSpan wakeUpTime, TimeSpan sleepTime, TimeSpan currentTime)
         {
             // Normalize sleepTime to handle cases where sleepTime is after midnight
-            if (sleepTime < currentTime)
-            {
-                return 100;
-            }
             if (sleepTime < wakeUpTime)
             {
                 sleepTime += TimeSpan.FromDays(1);
@@ -171,11 +167,13 @@ namespace Luxor.Services
             }
 
             // Calculate the total span and elapsed time
-            TimeSpan totalSpan = sleepTime - wakeUpTime;
+            TimeSpan totalSpan = (sleepTime - wakeUpTime).Duration();
             TimeSpan elapsedTime = currentTime - wakeUpTime;
 
             // Calculate the percentage
             double percentage = (elapsedTime.TotalMinutes / totalSpan.TotalMinutes) * 100;
+            if(percentage < 0) percentage = 0;
+            if(percentage >= 100) percentage = 100;
 
             return (int)Math.Ceiling(percentage);
 

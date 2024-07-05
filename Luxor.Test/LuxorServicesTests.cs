@@ -1,7 +1,4 @@
-using System;
 using Luxor.Services;
-using Luxor.Settings;
-using Moq;
 using Xunit;
 
 namespace Luxor.Test
@@ -14,6 +11,7 @@ namespace Luxor.Test
             // Arrange
             var luxorService = new LuxorServices();
             int validBrightness = 50;
+            luxorService.SetIsDisabled(true); // disabled gamma change for testing purposes
 
             // Act
             luxorService.SetMonitorBrightness(validBrightness);
@@ -29,21 +27,26 @@ namespace Luxor.Test
         {
             // Arrange
             var luxorService = new LuxorServices();
+            luxorService.SetIsDisabled(true); // disabled gamma change for testing purposes
 
             // Act & Assert
             Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => luxorService.SetMonitorBrightness(invalidBrightness));
         }
 
         [Theory]
-        [InlineData(8, 0,  22, 0,  8, 0, 0.0)]
-        [InlineData(8, 0, 22, 0, 10, 0, 12)]
+        [InlineData(8, 0, 22, 0, 8, 0, 0.0)]
+        [InlineData(8, 0, 22, 0, 10, 0, 15)]
         [InlineData(8, 0, 22, 0, 22, 0, 100.0)]
         [InlineData(8, 0, 2, 0, 8, 0, 0.0)]
-        [InlineData(8, 0, 2, 0, 14, 0, 25.0)]
+        [InlineData(8, 0, 2, 0, 14, 0, 34)]
         [InlineData(8, 0, 2, 0, 2, 0, 100.0)]
         [InlineData(22, 0, 6, 0, 2, 0, 50.0)]
         [InlineData(22, 0, 6, 0, 23, 0, 13)]
-        public void CalculateTimePercentage_ShouldReturnExpectedPercentage(int wakeUpHour, int wakeUpMinute,                                                                 int sleepHour, int sleepMinute,                                                      int currentHour, int currentMinute,                                                          double expected)
+        [InlineData(8, 0, 22, 0, 1, 39, 100)]
+        public void CalculateTimePercentage_ShouldReturnExpectedPercentage(int wakeUpHour, int wakeUpMinute, 
+            int sleepHour, int sleepMinute, 
+            int currentHour, int currentMinute, 
+            double expected)
         {
             // Arrange
             TimeSpan wakeUpTime = new TimeSpan(wakeUpHour, wakeUpMinute, 0);
@@ -52,6 +55,7 @@ namespace Luxor.Test
 
             // Act
             var luxorService = new LuxorServices();
+            luxorService.SetIsDisabled(true); // disabled gamma change for testing purposes
 
             double result = luxorService.CalculateTimePercentage(wakeUpTime, sleepTime, currentTime);
 
