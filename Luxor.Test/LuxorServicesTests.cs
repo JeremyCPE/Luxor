@@ -11,7 +11,6 @@ namespace Luxor.Test
             // Arrange
             var luxorService = new LuxorServices();
             int validBrightness = 50;
-            luxorService.SetIsDisabled(true); // disabled gamma change for testing purposes
 
             // Act
             luxorService.SetMonitorBrightness(validBrightness);
@@ -27,7 +26,6 @@ namespace Luxor.Test
         {
             // Arrange
             var luxorService = new LuxorServices();
-            luxorService.SetIsDisabled(true); // disabled gamma change for testing purposes
 
             // Act & Assert
             Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => luxorService.SetMonitorBrightness(invalidBrightness));
@@ -55,7 +53,6 @@ namespace Luxor.Test
 
             // Act
             var luxorService = new LuxorServices();
-            luxorService.SetIsDisabled(true); // disabled gamma change for testing purposes
 
             double result = luxorService.CalculateTimePercentage(wakeUpTime, sleepTime, currentTime);
 
