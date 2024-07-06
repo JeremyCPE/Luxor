@@ -63,12 +63,17 @@ namespace Luxor.Services
                 Green = new ushort[256],
                 Blue = new ushort[256]
             };
-            IntPtr hdc = NativeMethods.GetDC(IntPtr.Zero);
+            try
+            {
+                IntPtr hdc = NativeMethods.GetDC(IntPtr.Zero);
 
-            bool result = NativeMethods.GetDeviceGammaRamp(hdc, ref ramp);
+                bool result = NativeMethods.GetDeviceGammaRamp(hdc, ref ramp);
+            }
 
-            Console.WriteLine(ramp.Blue);
-
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to getMonitorGamma, please verify the settings of your laptop {ex.Message}");
+            }
             return 0;
         }
 
@@ -78,7 +83,14 @@ namespace Luxor.Services
             {
                 throw new ArgumentOutOfRangeException("Brightness should be between 0 and 100");
             }
-            NativeMethods.SetMonitorBrightness(brightness);
+            try
+            {
+                NativeMethods.SetMonitorBrightness(brightness);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to set monitor brightness: {brightness}, please verify the settings of your laptop {ex.Message}");
+            }
         }
 
         public void SetMonitorGamma(int blueReduction, int brightness)
@@ -109,16 +121,22 @@ namespace Luxor.Services
                 if (blueValue > 65535) blueValue = 65535;
                 ramp.Blue[i] = (ushort)blueValue;
             }
-
-            IntPtr hdc = NativeMethods.GetDC(IntPtr.Zero);
-            bool result = NativeMethods.SetDeviceGammaRamp(hdc, ref ramp);
-            if (!result)
+            try
             {
-                int errorCode = Marshal.GetLastWin32Error();
-                // log the info, or try to catch the exception
+                IntPtr hdc = NativeMethods.GetDC(IntPtr.Zero);
+                bool result = NativeMethods.SetDeviceGammaRamp(hdc, ref ramp);
+                if (!result)
+                {
+                    int errorCode = Marshal.GetLastWin32Error();
+                    // log the info, or try to catch the exception
+                }
+                NativeMethods.ReleaseDC(IntPtr.Zero, hdc);
             }
-            NativeMethods.ReleaseDC(IntPtr.Zero, hdc);
-        }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Failed to setMonitor Gamma, please verify your computer, {ex.Message}");
+            }
+           }
 
         public TimeSpan GetSleepTime()
         {
