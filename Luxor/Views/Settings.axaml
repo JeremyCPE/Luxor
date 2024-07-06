@@ -18,9 +18,16 @@
 					MaterialOpacity="0.65" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
-		<Panel Margin="40">
-			<TextBlock> Lorem ipsum, here I'll put all the settings I want blalabal</TextBlock>
+		<Panel Margin="40,40,0,0">
+			<Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto,Auto"  Margin="40,20,0,0">
+				<CheckBox Grid.Row="0" IsChecked="{Binding RunAtStart}">Run at Start </CheckBox>
+				<CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding SmoothTransition}">Smooth Transition </CheckBox>
+				<Button  Grid.Row="1" Grid.Column="1" Margin="-30,0,0,0" Height="20" Width="20">
+						<PathIcon Data="{StaticResource info_regular}" Height="10" Width="10"/> </Button>
+			</Grid>
 		</Panel>
+		<Button Margin="40"  Content="Save Changes" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding SaveChangesButton}" ></Button>
+
 	</Panel>
 	
 </Window>
