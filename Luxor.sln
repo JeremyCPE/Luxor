@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luxor", "Luxor\Luxor.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luxor.Desktop", "Luxor.Desktop\Luxor.Desktop.csproj", "{11FCA319-1207-4DB5-89C8-B10E452AFE77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luxor.Test", "Luxor.Test\Luxor.Test.csproj", "{5E9EA9B7-CA81-4606-BA26-9A2E78AB6832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luxor.Test", "Luxor.Test\Luxor.Test.csproj", "{5E9EA9B7-CA81-4606-BA26-9A2E78AB6832}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{A7436F7E-E04C-48A3-B12F-A489637B55A8}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-desktop.yml = .github\workflows\dotnet-desktop.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
