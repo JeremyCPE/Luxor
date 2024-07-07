@@ -15,7 +15,6 @@ namespace Luxor.Tools
         public static void AddCommonServices(this IServiceCollection collection)
         {
             collection.AddTransient<ILuxorServices,LuxorServices>();
-            collection.AddTransient<IUserSettingsServices,UserSettingsServices>();
             collection.AddTransient<MainViewModel>();
             collection.AddTransient<SettingsViewModel>();
         }

@@ -14,21 +14,12 @@ namespace Luxor.ViewModels
     {
         public ICommand SaveChangesButton { get; }
 
-        private readonly IUserSettingsServices _settingsServices;
 
         public SettingsViewModel()
         {
             SaveChangesButton = ReactiveCommand.Create(() =>
             {
                // _settingsServices.Save();
-            });
-        }
-        public SettingsViewModel(IUserSettingsServices settingsUserServices)
-        {
-            _settingsServices = settingsUserServices;
-            SaveChangesButton = ReactiveCommand.Create(() =>
-            {
-                _settingsServices.Save();
             });
         }
     }

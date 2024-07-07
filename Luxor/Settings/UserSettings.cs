@@ -12,14 +12,24 @@ namespace Luxor.Settings
 
         public bool IsSmoothTransitionEnabled { get; set; } = true;
 
-        public List<string> WhiteList {  get; set; }
+        public List<string> WhiteList {  get; set; } = new();
 
         public bool RunAtStart { get; set; } = true;
 
+        public string Path { get; set; } = """%AppData%\Local\Luxor""";
 
-        public UserSettings() 
-        { 
-      
+        public void Replace(UserSettings importSettings)
+        {
+            this.IsDisabled = importSettings.IsDisabled;
+            this.WhiteList = importSettings.WhiteList;
+            this.IsSmoothTransitionEnabled = importSettings.IsSmoothTransitionEnabled;
+            this.SleepTime = importSettings.SleepTime;
+            this.WakeUpTime = importSettings.WakeUpTime;
+        }
+
+        public UserSettings()
+        {
+
         }
     }
 }
