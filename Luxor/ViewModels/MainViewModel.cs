@@ -25,6 +25,8 @@ public class MainViewModel : ViewModelBase
     private TimeSpan _wakeUpTime;
     private TimeSpan _sleepTime;
     private bool _isDisabled;
+
+    // TODO : Need to use PropertyChange observable
     public int Brightness
     {
         get => _brightness;

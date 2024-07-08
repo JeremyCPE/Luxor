@@ -9,6 +9,7 @@ using Avalonia.Controls;
 using Avalonia.Logging;
 using Luxor.Controller;
 using Luxor.Settings;
+using Luxor.ViewModels;
 using static Luxor.Controller.NativeMethods;
 
 namespace Luxor.Services
@@ -34,9 +35,8 @@ namespace Luxor.Services
         }
 
         /// <summary>
-        /// Adapt the gamma depending of the WakeUpTime and SleepTime. What we want : blue reduction 100% when sleepTime
+        /// Adapt the gamma depending of the WakeUpTime and SleepTime. What we want : blue reduction 100% when sleepTime = currentTime
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         private void AdaptGamma()
         {
             if(_userSettings.IsDisabled)

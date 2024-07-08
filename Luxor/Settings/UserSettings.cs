@@ -25,6 +25,7 @@ namespace Luxor.Settings
             this.IsSmoothTransitionEnabled = importSettings.IsSmoothTransitionEnabled;
             this.SleepTime = importSettings.SleepTime;
             this.WakeUpTime = importSettings.WakeUpTime;
+            this.RunAtStart = importSettings.RunAtStart;
         }
 
         public UserSettings()

@@ -26,7 +26,13 @@
 						<PathIcon Data="{StaticResource info_regular}" Height="10" Width="10"/> </Button>
 			</Grid>
 		</Panel>
-		<Button Margin="40"  Content="Save Changes" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding SaveChangesButton}" ></Button>
+		<Button Margin="40"  Content="Save Changes" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding SaveChangesButton}" >
+			<FlyoutBase.AttachedFlyout>
+				<Flyout>
+					<TextBlock Text="Saved !" />
+				</Flyout>
+			</FlyoutBase.AttachedFlyout>
+		</Button>
 
 	</Panel>
 	
